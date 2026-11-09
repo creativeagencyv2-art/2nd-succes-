@@ -9,9 +9,11 @@
 <div class="line"></div>
 <p class="amt" style="margin:0">Link not opening? Contact us:<br><b id="em"></b><br><b id="ph"></b></p></div></div><footer><div class="w"><b>Creative Agency</b><br>Email: creativeagency.b83@gmail.com<br>Phone: +91 84395 09941</div></footer>
 <script>
-function send(d){d._subject='1000 AI Reels Bundle - '+(d.stage==='lead'?'New lead':'Payment submitted (verify UTR)');d._template='table';d._captcha='false';if(!window.CFG||!CFG.ENDPOINT)return Promise.resolve();
- var c=new AbortController();setTimeout(function(){c.abort()},4000);
- return fetch(CFG.ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d),signal:c.signal}).catch(function(){})}
+function send(d){var t='1000 AI Reels Bundle - '+(d.stage==='lead'?'New lead':'Payment submitted (verify UTR)');d.subject=t;d._subject=t;d.from_name='Creative Agency Website';
+ var ps=[];function sg(){var c=new AbortController();setTimeout(function(){c.abort()},4000);return c.signal}
+ if(CFG.ENDPOINT){var m=JSON.parse(JSON.stringify(d));if(CFG.ACCESS_KEY)m.access_key=CFG.ACCESS_KEY;ps.push(fetch(CFG.ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(m),signal:sg()}).catch(function(){}))}
+ if(CFG.SHEET)ps.push(fetch(CFG.SHEET,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d),signal:sg()}).catch(function(){}));
+ return Promise.all(ps)}
 function S(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v)}catch(e){return null}}
 </script>
 <script>
